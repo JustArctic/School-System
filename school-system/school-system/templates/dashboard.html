@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="main-header">
+
+    <img
+        src="{{ url_for('static', filename='logo.png') }}"
+        class="school-logo"
+    >
+
+    <div>
+
+        <h1>Bonnyrigg Heights High School</h1>
+
+        <p>Enterprise School Management System</p>
+
+    </div>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="/timetable">Timetable</a>
+
+    <a href="/events">Events</a>
+
+    <a href="/canteen">Canteen</a>
+
+    <a href="/logout">Logout</a>
+
+</nav>
+
+<!-- WELCOME -->
+
+<div class="dashboard-box">
+
+    <h2>Welcome {{ user }}</h2>
+
+    <p>
+        Access your classes, events and school services.
+    </p>
+
+</div>
+
+<!-- QUICK ACCESS -->
+
+<div class="card-container">
+
+    <div class="card">
+
+        <h2>📚 Timetable</h2>
+
+        <p>View your daily classes and rooms.</p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🎉 Events</h2>
+
+        <p>Stay updated with school activities.</p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🍔 Canteen</h2>
+
+        <p>Check menu items and availability.</p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>School Management System</h1>
+    <p>Track classes, school events and canteen items.</p>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/timetable">Timetable</a>
+    <a href="/events">Events</a>
+    <a href="/canteen">Canteen</a>
+</nav>
+
+<div class="card-container">
+    <div class="card">
+        <h2>Classes</h2>
+        <p>View your class timetable and subjects.</p>
+    </div>
+
+    <div class="card">
+        <h2>Events</h2>
+        <p>Stay updated with school activities and important dates.</p>
+    </div>
+
+    <div class="card">
+        <h2>Canteen</h2>
+        <p>Check menu items and prices.</p>
+    </div>
+</div>
+
+</body>
+</html>
