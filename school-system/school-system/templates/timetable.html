@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Timetable</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<h1>Student Timetable</h1>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/events">Events</a>
+    <a href="/canteen">Canteen</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<!-- ====================== -->
+<!-- SEARCH SYSTEM -->
+<!-- ====================== -->
+
+<!-- ====================== -->
+<!-- SUBJECT SEARCH -->
+<!-- ====================== -->
+
+<div class="search-box">
+
+    <h2>Subject Room Finder</h2>
+
+    <input
+        type="text"
+        id="subjectSearch"
+        placeholder="Search subject..."
+        onkeyup="searchSubject()"
+    >
+
+</div>
+
+<!-- SEARCH RESULTS -->
+
+<table id="subjectTable">
+
+    <tr>
+        <th>Subject</th>
+        <th>Room</th>
+        <th>Teacher</th>
+    </tr>
+
+    {% for class_item in timetable %}
+
+    <tr>
+
+        <td>{{ class_item.subject }}</td>
+
+        <td>{{ class_item.room }}</td>
+
+        <td>{{ class_item.teacher }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<!-- ====================== -->
+<!-- SEARCH SCRIPT -->
+<!-- ====================== -->
+
+<script>
+
+function searchSubject() {
+
+    let input =
+        document.getElementById("subjectSearch");
+
+    let filter =
+        input.value.toUpperCase();
+
+    let table =
+        document.getElementById("subjectTable");
+
+    let tr =
+        table.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {
+
+        let td =
+            tr[i].getElementsByTagName("td")[0];
+
+        if (td) {
+
+            let txtValue =
+                td.textContent || td.innerText;
+
+            if (
+                txtValue.toUpperCase().indexOf(filter) > -1
+            ) {
+
+                tr[i].style.display = "";
+
+            } else {
+
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
