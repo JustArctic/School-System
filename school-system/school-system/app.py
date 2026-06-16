@@ -18,16 +18,11 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    username = db.Column(
-        db.String(100),
-        unique=True,
-        nullable=False
-    )
+    username = db.Column(db.String(100))
 
-    password = db.Column(
-        db.String(100),
-        nullable=False
-    )
+    password = db.Column(db.String(100))
+
+    role = db.Column(db.String(20))
 
 # =========================
 # TIMETABLE TABLE
@@ -61,10 +56,20 @@ with app.app_context():
 
         user = User(
             username="student",
-            password="1234"
+            password="1234",
+            role ="student"
+
         )
 
         db.session.add(user)
+
+        admin = User(
+        username="admin",
+        password="admin123",
+        role="admin"
+        )
+
+        db.session.add(admin)
 
         timetable_data = [
 
@@ -142,6 +147,7 @@ def login():
         if user:
 
             session["user"] = username
+            session["role"] = user.role
 
             return redirect(url_for("dashboard"))
 
@@ -208,6 +214,21 @@ def logout():
     session.pop("user", None)
 
     return redirect(url_for("login"))
+
+# =========================
+# ADMIN
+# =========================
+@app.route("/admin")
+def admin():
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    return render_template("admin.html")
+
 
 # =========================
 # RUN APP

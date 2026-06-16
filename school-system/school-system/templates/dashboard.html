@@ -89,3 +89,11 @@
 
 </body>
 </html>
+
+{% if session["role"] == "admin" %}
+
+<a href="/admin">
+    <button>Admin Dashboard</button>
+</a>
+
+{% endif %}
