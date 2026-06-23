@@ -30,8 +30,8 @@ User - student
 Password - 1234
 
 Install Reqiurements:
-pip install flask_sqlalchemy
-pip install flask
+- pip install flask_sqlalchemy
+- pip install flask
 
 The project was developed in
 Visual Studio Code
