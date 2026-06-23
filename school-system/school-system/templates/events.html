@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Events</title>
+
+    <title>School Events</title>
 
     <link rel="stylesheet"
     href="{{ url_for('static', filename='style.css') }}">
@@ -10,28 +12,150 @@
 
 <body>
 
-<h1>School Events</h1>
+    <nav>
 
-<nav>
-    <a href="/dashboard">Dashboard</a>
-    <a href="/timetable">Timetable</a>
-    <a href="/canteen">Canteen</a>
-    <a href="/logout">Logout</a>
-</nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/timetable">Timetable</a>
+        <a href="/canteen">Canteen</a>
+        <a href="/logout">Logout</a>
 
+    </nav>
 
-{% for event in events %}
+    <div class="hero-event">
 
-<tr>
+        <h1>📅 School Events</h1>
 
-    <td>{{ event.date }}</td>
+        <h2>Stay Updated With School Activities</h2>
 
-    <td>{{ event.title }}</td>
+        <p>
+            View upcoming events, excursions, carnivals,
+            assessments and important announcements.
+        </p>
 
-    <td>{{ event.location }}</td>
+    </div>
 
-    <td>{{ event.status }}</td>
+    <div class="card-container">
 
-</tr>
+        <div class="card">
 
-{% endfor %}
+            <h2>{{ events|length }}</h2>
+
+            <p>Upcoming Events</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>2026</h2>
+
+            <p>School Calendar</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Year 12</h2>
+
+            <p>Important Notices</p>
+
+        </div>
+
+    </div>
+
+    <div class="event-buttons">
+
+        <button>🏆 Sports</button>
+
+        <button>🚌 Excursions</button>
+
+        <button>📚 Academic</button>
+
+        <button>🎓 Year 12</button>
+
+        <button>🏫 Whole School</button>
+
+    </div>
+
+    <h2>Upcoming Events</h2>
+
+    {% if events %}
+
+        {% for event in events %}
+
+        <div class="event-card">
+
+            <h3>{{ event.title }}</h3>
+
+            <p><strong>📅 Date:</strong> {{ event.date }}</p>
+
+            <p><strong>📍 Location:</strong> {{ event.location }}</p>
+
+            <p><strong>📌 Status:</strong> {{ event.status }}</p>
+
+            <p><strong>🏷 Category:</strong> {{ event.category }}</p>
+
+            <p>{{ event.description }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="event-card">
+
+            <h3>No Events Available</h3>
+
+            <p>
+                There are currently no events in the system.
+                Log in as an administrator to add events.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+    <div class="announcement-section">
+
+        <h2>📢 School Announcements</h2>
+
+        <div class="announcement">
+
+            <h3>Semester Reports Released</h3>
+
+            <p>
+                Semester reports are now available.
+                Students should check with their teachers if
+                they have any questions regarding results.
+            </p>
+
+        </div>
+
+        <div class="announcement">
+
+            <h3>Year 12 Assessment Schedule</h3>
+
+            <p>
+                The updated assessment schedule has been
+                released. Students should review all upcoming
+                due dates and examination information.
+            </p>
+
+        </div>
+
+        <div class="announcement">
+
+            <h3>Uniform Reminder</h3>
+
+            <p>
+                Students are reminded to wear the correct
+                school uniform each day and bring their ID card.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -256,3 +256,110 @@ button:hover {
 
     border: 1px solid #ccc;
 }
+
+/* ====================== */
+/* EVENTS PAGE */
+/* ====================== */
+
+.hero-event{
+
+    background: linear-gradient(135deg,#003b8e,#005bbb);
+
+    color:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.hero-event h1,
+.hero-event h2{
+
+    color:white;
+}
+
+.event-buttons{
+
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.event-buttons button{
+
+    width:auto;
+
+    background:#f5c400;
+
+    color:#003b8e;
+
+    font-weight:bold;
+
+    margin:5px;
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:20px;
+}
+
+.event-buttons button:hover{
+
+    background:#ffd94d;
+}
+
+.event-card{
+
+    background:white;
+
+    margin-bottom:20px;
+
+    padding:20px;
+
+    border-left:8px solid #f5c400;
+
+    border-radius:12px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+
+    transition:0.2s;
+}
+
+.event-card:hover{
+
+    transform:translateY(-2px);
+}
+
+.event-card h3{
+
+    margin-top:0;
+
+    color:#003b8e;
+}
+
+.announcement-section{
+
+    margin-top:40px;
+}
+
+.announcement{
+
+    background:white;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border-left:6px solid #003b8e;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}

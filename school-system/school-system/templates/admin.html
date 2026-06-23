@@ -1,3 +1,71 @@
+<h2>Add New Event</h2>
+
+<form action="/admin/add_event" method="POST">
+
+    <input type="text" name="title" placeholder="Event Name" required>
+
+    <input type="text" name="date" placeholder="Date" required>
+
+    <input type="text" name="location" placeholder="Location" required>
+
+    <input type="text" name="status" placeholder="Status" required>
+
+    <input type="text" name="category" placeholder="Category">
+
+    <textarea name="description"
+    placeholder="Description"></textarea>
+
+    <button type="submit">Add Event</button>
+
+</form>
+
+<h2>Manage Events</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+
+{% for event in events %}
+
+<tr>
+
+    <td>{{ event.id }}</td>
+
+    <td>{{ event.title }}</td>
+
+    <td>{{ event.date }}</td>
+
+    <td>{{ event.location }}</td>
+
+    <td>{{ event.status }}</td>
+
+    <td>
+
+        <a href="/admin/edit_event/{{ event.id }}">
+            Edit
+        </a>
+
+        |
+
+        <a href="/admin/delete_event/{{ event.id }}">
+            Delete
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
 <h2>Current Events</h2>
 
 <table border="1">
@@ -28,3 +96,22 @@
     {% endfor %}
 
 </table>
+<textarea
+    name="description"
+    placeholder="Event Description"
+    required>
+</textarea>
+
+<select name="category">
+
+    <option value="Sports">Sports</option>
+
+    <option value="Academic">Academic</option>
+
+    <option value="Excursion">Excursion</option>
+
+    <option value="Year 12">Year 12</option>
+
+    <option value="Whole School">Whole School</option>
+
+</select>

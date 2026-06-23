@@ -1,0 +1,26 @@
+<h1>Edit Event</h1>
+
+<form method="POST">
+
+    <input type="text" name="title"
+    value="{{ event.title }}">
+
+    <input type="text" name="date"
+    value="{{ event.date }}">
+
+    <input type="text" name="location"
+    value="{{ event.location }}">
+
+    <input type="text" name="status"
+    value="{{ event.status }}">
+
+    <input type="text" name="category"
+    value="{{ event.category }}">
+
+    <textarea name="description">{{ event.description }}</textarea>
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+</form>
