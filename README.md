@@ -29,9 +29,23 @@ Login:
 User - student
 Password - 1234
 
-Install Reqiurements:
-- pip install flask_sqlalchemy
-- pip install flask
+Admin User - Admin
+Admin Password - Admin123
+
+Software Requirements
+Python 3.12+
+Visual Studio Code
+Flask
+Flask-SQLAlchemy
+SQLite (included with Python)
+VS Code Extensions
+
+Install these extensions:
+Python (Microsoft)
+Pylance
+SQLite Viewer (optional)
+HTML CSS Support
+Live Server (optional)
 
 The project was developed in
 Visual Studio Code
