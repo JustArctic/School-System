@@ -1,6 +1,7 @@
+<!DOCTYPE html>
+<html>
 <head>
-
-    <title>School Events</title>
+    <title>Events</title>
 
     <link rel="stylesheet"
     href="{{ url_for('static', filename='style.css') }}">
@@ -9,140 +10,28 @@
 
 <body>
 
-<nav>
-
-    <a href="/dashboard">Dashboard</a>
-
-    <a href="/timetable">Timetable</a>
-
-    <a href="/canteen">Canteen</a>
-
-    <a href="/logout">Logout</a>
-
-</nav>
-
-<input
-    type="text"
-    id="eventSearch"
-    placeholder="Search events..."
-    onkeyup="searchEvents()"
->
-
 <h1>School Events</h1>
 
-<table>
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/timetable">Timetable</a>
+    <a href="/canteen">Canteen</a>
+    <a href="/logout">Logout</a>
+</nav>
 
-    <tr>
-        <th>Date</th>
-        <th>Event</th>
-        <th>Location</th>
-        <th>Status</th>
-    </tr>
 
-    <tr>
-        <td>12 June</td>
-        <td>Athletics Carnival</td>
-        <td>School Oval</td>
-        <td>Upcoming</td>
-    </tr>
+{% for event in events %}
 
-    <tr>
-        <td>18 June</td>
-        <td>Year 12 Careers Expo</td>
-        <td>Hall</td>
-        <td>Upcoming</td>
-    </tr>
+<tr>
 
-    <tr>
-        <td>24 June</td>
-        <td>Parent Teacher Night</td>
-        <td>HP Block</td>
-        <td>Upcoming</td>
-    </tr>
+    <td>{{ event.date }}</td>
 
-    <tr>
-        <td>2 July</td>
-        <td>Multicultural Day</td>
-        <td>School Grounds</td>
-        <td>Upcoming</td>
-    </tr>
+    <td>{{ event.title }}</td>
 
-    <tr>
-        <td>10 July</td>
-        <td>Year 12 Trial Exams Begin</td>
-        <td>Various Rooms</td>
-        <td>Important</td>
-    </tr>
+    <td>{{ event.location }}</td>
 
-</table>
+    <td>{{ event.status }}</td>
 
-<h2>Announcements</h2>
+</tr>
 
-<div class="dashboard-box">
-
-    <h3>Library Opening Hours</h3>
-
-    <p>
-        The library is now open before school from 7:45am.
-    </p>
-
-</div>
-
-<div class="dashboard-box">
-
-    <h3>Canteen Special</h3>
-
-    <p>
-        Chicken burger meal deal available this week.
-    </p>
-
-</div>
-
-<div class="dashboard-box">
-
-    <h3>Exam Reminder</h3>
-
-    <p>
-        Year 12 students should check their timetable before trial exams.
-    </p>
-
-</div>
-
-</body>
-</html>
-
-<script>
-
-function searchEvents() {
-
-    let input =
-        document.getElementById("eventSearch");
-
-    let filter =
-        input.value.toUpperCase();
-
-    let table =
-        document.querySelector("table");
-
-    let rows =
-        table.getElementsByTagName("tr");
-
-    for (let i = 1; i < rows.length; i++) {
-
-        let td =
-            rows[i].getElementsByTagName("td")[1];
-
-        if (td) {
-
-            let text =
-                td.textContent || td.innerText;
-
-            rows[i].style.display =
-                text.toUpperCase().includes(filter)
-                ? ""
-                : "none";
-        }
-    }
-}
-
-</script>
+{% endfor %}

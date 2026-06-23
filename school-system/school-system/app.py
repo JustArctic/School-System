@@ -41,35 +41,49 @@ class Timetable(db.Model):
 
     teacher = db.Column(db.String(100))
 
+class Event(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    date = db.Column(db.String(50))
+
+    title = db.Column(db.String(100))
+
+    location = db.Column(db.String(100))
+
+    status = db.Column(db.String(50))
+
 # =========================
-# CREATE DATABASE + TEST USER
+# CREATE DATABASE + DEFAULT DATA
 # =========================
 with app.app_context():
 
     db.create_all()
 
-    existing_user = User.query.filter_by(
-        username="student"
-    ).first()
+    # Create student account
+    if User.query.filter_by(username="student").first() is None:
 
-    if not existing_user:
-
-        user = User(
-            username="student",
-            password="1234",
-            role ="student"
-
+        db.session.add(
+            User(
+                username="student",
+                password="1234",
+                role="student"
+            )
         )
 
-        db.session.add(user)
+    # Create admin account
+    if User.query.filter_by(username="admin").first() is None:
 
-        admin = User(
-        username="admin",
-        password="admin123",
-        role="admin"
+        db.session.add(
+            User(
+                username="admin",
+                password="admin123",
+                role="admin"
+            )
         )
 
-        db.session.add(admin)
+    # Create timetable data once
+    if Timetable.query.count() == 0:
 
         timetable_data = [
 
@@ -118,15 +132,45 @@ with app.app_context():
                 period="6",
                 subject="Study",
                 room="STUDY_LIB",
-                teacher="Ms D. Hatzimanolis . STUDYROSTER",
+                teacher="Ms D. Hatzimanolis"
             )
         ]
 
         for item in timetable_data:
             db.session.add(item)
 
-        db.session.commit()
+    # Create default events once
+    if Event.query.count() == 0:
 
+        default_events = [
+
+            Event(
+                date="12 June",
+                title="Athletics Carnival",
+                location="School Oval",
+                status="Upcoming"
+            ),
+
+            Event(
+                date="18 June",
+                title="Year 12 Careers Expo",
+                location="Hall",
+                status="Upcoming"
+            ),
+
+            Event(
+                date="24 June",
+                title="Parent Teacher Night",
+                location="HP Block",
+                status="Upcoming"
+            )
+
+        ]
+
+        for event in default_events:
+            db.session.add(event)
+
+    db.session.commit()
 # =========================
 # LOGIN
 # =========================
@@ -195,7 +239,12 @@ def timetable():
 @app.route("/events")
 def events():
 
-    return render_template("events.html")
+    all_events = Event.query.all()
+
+    return render_template(
+        "events.html",
+        events=all_events
+    )
 
 # =========================
 # CANTEEN
@@ -211,7 +260,7 @@ def canteen():
 @app.route("/logout")
 def logout():
 
-    session.pop("user", None)
+    session.clear()
 
     return redirect(url_for("login"))
 
@@ -227,8 +276,49 @@ def admin():
     if session.get("role") != "admin":
         return "Access Denied"
 
-    return render_template("admin.html")
+    events = Event.query.all()
 
+    return render_template(
+        "admin.html",
+        events=events
+    )
+
+@app.route("/admin/add_event", methods=["POST"])
+def add_event():
+
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    new_event = Event(
+
+        date=request.form["date"],
+
+        title=request.form["title"],
+
+        location=request.form["location"],
+
+        status=request.form["status"]
+    )
+
+    db.session.add(new_event)
+
+    db.session.commit()
+
+    return redirect(url_for("admin"))
+
+@app.route("/admin/delete_event/<int:event_id>")
+def delete_event(event_id):
+
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    event = Event.query.get_or_404(event_id)
+
+    db.session.delete(event)
+
+    db.session.commit()
+
+    return redirect(url_for("admin"))
 
 # =========================
 # RUN APP

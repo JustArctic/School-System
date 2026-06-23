@@ -1,74 +1,30 @@
-<!DOCTYPE html>
-<html>
+<h2>Current Events</h2>
 
-<head>
+<table border="1">
 
-    <title>Admin Dashboard</title>
+    <tr>
+        <th>Date</th>
+        <th>Event</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Delete</th>
+    </tr>
 
-    <link rel="stylesheet"
-    href="{{ url_for('static', filename='style.css') }}">
+    {% for event in events %}
 
-</head>
+    <tr>
+        <td>{{ event.date }}</td>
+        <td>{{ event.title }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.status }}</td>
 
-<body>
+        <td>
+            <a href="/admin/delete_event/{{ event.id }}">
+                Delete
+            </a>
+        </td>
+    </tr>
 
-<h1>Admin Dashboard</h1>
+    {% endfor %}
 
-<nav>
-
-    <a href="/dashboard">Dashboard</a>
-
-    <a href="/events">Events</a>
-
-    <a href="/canteen">Canteen</a>
-
-    <a href="/logout">Logout</a>
-
-</nav>
-
-<div class="card-container">
-
-    <div class="card">
-
-        <h2>👥 Users</h2>
-
-        <p>Manage student accounts.</p>
-
-    </div>
-
-    <div class="card">
-
-        <h2>🎉 Events</h2>
-
-        <p>Add and update events.</p>
-
-    </div>
-
-    <div class="card">
-
-        <h2>🍔 Canteen</h2>
-
-        <p>Edit menu items and prices.</p>
-
-    </div>
-
-</div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-</head>
-<body>
-
-<h1>Admin Dashboard</h1>
-
-<a href="/dashboard">Dashboard</a>
-
-<p>Admin controls will go here.</p>
-
-</body>
-</html>
+</table>
